@@ -12,9 +12,11 @@ class RowWinningStrategy(WinningStrategy):
 
     def check_winner(self, row, col, player):
         self.rows[row][player] = self.rows[row][player] + 1
-        return self.rows[row][player] == self.dimension
+        return self.rows[row][player] == self.dimension, f"row {row}."
 
     def remove_check_winner(self, row, col, player):
         self.rows[row][player] = self.rows[row][player] - 1
 
+    def check_win_possibility(self, row, col, player):
+        return self.rows[row][player] == self.dimension-1
 

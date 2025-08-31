@@ -1,5 +1,5 @@
-from tictactoe.models.Board import Board
 from tictactoe.models.BotDifficultyLevel import BotDifficultyLevel
+from tictactoe.models.Game import Game
 from tictactoe.models.Player import Player
 from tictactoe.models.PlayerType import PlayerType
 from tictactoe.strategies.botPlayingStrategies.BotPlayingStrategy import BotPlayingStrategy
@@ -12,5 +12,5 @@ class Bot(Player):
         self.bot_difficulty_level = bot_difficulty_level
         self.bot_playing_strategy = bot_playing_strategy
 
-    def make_move(self, board:Board):
-        return self.bot_playing_strategy.make_move(board)
+    def make_move(self, game:Game):
+        return self.bot_playing_strategy.make_move(game)

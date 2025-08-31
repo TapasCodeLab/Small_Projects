@@ -8,7 +8,6 @@ from tictactoe.models.Board import Board
 from tictactoe.models.GameStatus import GameStatus
 from tictactoe.models.PlayerType import PlayerType
 
-
 class GameBuilder(object):
     def __init__(self):
         self.players = None
@@ -52,6 +51,7 @@ class Game(object):
         self.game_state = GameStatus.IN_PROGRESS
         self.board = Board(self.dimension)
         self.winner = None
+        self.win_how = None
         self.next_player = random.randrange(len(self.players))  #any random integer from 0 to number of players-1
         self.moves = []
 
@@ -63,6 +63,21 @@ class Game(object):
 
     def get_dimension(self):
         return self.dimension
+
+    def get_win_how(self):
+        return self.win_how
+
+    def get_winning_strategies(self):
+        return self.winning_strategies
+
+    def get_moves_length(self):
+        return len(self.moves)
+
+    def get_player_index(self):
+        return self.next_player
+
+    def get_players(self):
+        return self.players
 
     def get_next_player(self):
         player = self.players[self.next_player]
@@ -81,27 +96,14 @@ class Game(object):
         self.next_player = (self.next_player +len(self.players) - 1) % len(self.players)
         self.remove_check_winner(row, col, player)
 
-
-    def get_moves_length(self):
-        return len(self.moves)
-
     def check_winner(self, row, col, player):
         for ws in self.winning_strategies:
-            if ws.check_winner(row, col, player):
+            flag, how = ws.check_winner(row, col, player)
+            if flag:
                 self.game_state = GameStatus.COMPLETED
                 self.winner = player
+                self.win_how = how
 
     def remove_check_winner(self, row, col, player):
         for ws in self.winning_strategies:
             ws.remove_check_winner(row, col, player)
-
-
-
-
-
-
-
-
-
-
-

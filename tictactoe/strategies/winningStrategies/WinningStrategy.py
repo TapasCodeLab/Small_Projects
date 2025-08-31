@@ -9,3 +9,8 @@ class WinningStrategy(ABC):
     @abstractmethod
     def remove_check_winner(self, row, col, player):
         pass
+
+    @abstractmethod
+    def check_win_possibility(self, row, col, player):
+        pass
+

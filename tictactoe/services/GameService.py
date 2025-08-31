@@ -48,7 +48,7 @@ class GameService(object):
     def make_move(self,game:Game):
         player = game.get_next_player()
         print(f"It is {player.get_name()}'s turn:")
-        row, col = player.make_move(game.get_board())
+        row, col = player.make_move(game)
         game.get_board().get_cell(row,col).set_player(player)
         game.add_move(row,col,player)
         game.check_winner(row, col, player)

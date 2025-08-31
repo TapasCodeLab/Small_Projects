@@ -12,7 +12,10 @@ class ColWinningStrategy(WinningStrategy):
 
     def check_winner(self, row, col, player):
         self.cols[col][player] = self.cols[col][player] + 1
-        return self.cols[col][player] == self.dimension
+        return self.cols[col][player] == self.dimension, f"Column {col}."
 
     def remove_check_winner(self, row, col, player):
         self.cols[col][player] = self.cols[col][player] - 1
+
+    def check_win_possibility(self, row, col, player):
+        return self.cols[col][player] == self.dimension-1

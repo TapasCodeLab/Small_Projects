@@ -1,4 +1,4 @@
-from tictactoe.models.Board import Board
+from tictactoe.models.Game import Game
 from tictactoe.models.PlayerType import PlayerType
 from tictactoe.models.Symbol import Symbol
 
@@ -11,7 +11,8 @@ class Player(object):
     def get_name(self):
         return self.name
 
-    def make_move(self, board:Board):
+    def make_move(self, game:Game):
+        board = game.get_board()
         while True:
             row = int(input('Please enter row: '))
             col = int(input('Please enter column: '))

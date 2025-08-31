@@ -13,7 +13,8 @@ if __name__ == '__main__':
     player1 = game_controller.create_player('Prisha',PlayerType.HUMAN,'X')
     # player2 = game_controller.create_player('Tapas', PlayerType.HUMAN, '#')
     # player2 = game_controller.create_player('Bot1', PlayerType.BOT, '#', BotDifficultyLevel.EASY)
-    player3 = game_controller.create_player('Bot',PlayerType.BOT,'O',BotDifficultyLevel.EASY)
+    #player3 = game_controller.create_player('Bot',PlayerType.BOT,'O',BotDifficultyLevel.EASY)
+    player3 = game_controller.create_player('Bot', PlayerType.BOT, 'O', BotDifficultyLevel.MEDIUM)
     players = [player1, player3]
     size = 3
     winning_strategies = game_controller.create_ws(size, players,[WinningStrategyType.ROW,WinningStrategyType.COL,WinningStrategyType.DIA])
@@ -33,7 +34,7 @@ if __name__ == '__main__':
 
     #game.get_board().print_board()
     if game.get_game_state()==GameStatus.COMPLETED:
-        print(f"{game.winner.get_name()} won the game.")
+        print(f"{game.winner.get_name()} won the game by capturing {game.get_win_how()}")
     else:
         print("The game was drawn.")
 
