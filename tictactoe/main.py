@@ -1,21 +1,25 @@
 # Client code
+from tictactoe.services.GameService import GameService
 from tictactoe.controllers.GameController import GameController
 from tictactoe.models.BotDifficultyLevel import BotDifficultyLevel
 from tictactoe.models.GameStatus import GameStatus
 from tictactoe.models.PlayerType import PlayerType
-from tictactoe.services.GameService import GameService
+from tictactoe.models.WinningStrategyType import WinningStrategyType
 
 if __name__ == '__main__':
     game_service = GameService()
     game_controller = GameController(game_service)
 
     player1 = game_controller.create_player('Prisha',PlayerType.HUMAN,'X')
-    player2 = game_controller.create_player('Tapas', PlayerType.HUMAN, '#')
+    # player2 = game_controller.create_player('Tapas', PlayerType.HUMAN, '#')
+    # player2 = game_controller.create_player('Bot1', PlayerType.BOT, '#', BotDifficultyLevel.EASY)
     player3 = game_controller.create_player('Bot',PlayerType.BOT,'O',BotDifficultyLevel.EASY)
-    players = [player1, player2,player3]
-    size = 4
-    winning_strategies = game_controller.create_ws(size, players)
+    players = [player1, player3]
+    size = 3
+    winning_strategies = game_controller.create_ws(size, players,[WinningStrategyType.ROW,WinningStrategyType.COL,WinningStrategyType.DIA])
     game = game_controller.create_game(size, players, winning_strategies)
+
+    print("Welcome to the game: ")
     game_controller.print_board(game)
 
 

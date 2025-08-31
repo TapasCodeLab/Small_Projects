@@ -7,6 +7,7 @@ from tictactoe.models.PlayerType import PlayerType
 from tictactoe.strategies.winningStrategies.ColWinningStrategy import ColWinningStrategy
 from tictactoe.strategies.winningStrategies.DiagonalWinningStrategy import DiagonalWinningStrategy
 from tictactoe.strategies.winningStrategies.RowWinningStrategy import RowWinningStrategy
+from tictactoe.models.WinningStrategyType import WinningStrategyType
 
 class GameService(object):
     def __init__(self):
@@ -20,9 +21,16 @@ class GameService(object):
         else:
             raise InvalidPlayerType
 
-    def create_ws(self, size, players):
-        winning_strategies = [RowWinningStrategy(size, players), ColWinningStrategy(size, players),
-                              DiagonalWinningStrategy(size, players)]
+    def create_ws(self, size, players,strategies):
+        winning_strategies = []
+        for strategy in strategies:
+            if strategy == WinningStrategyType.ROW:
+                winning_strategies.append(RowWinningStrategy(size, players))
+            elif strategy == WinningStrategyType.COL:
+                winning_strategies.append(ColWinningStrategy(size, players))
+            elif strategy == WinningStrategyType.DIA:
+                winning_strategies.append(DiagonalWinningStrategy(size, players))
+
         return winning_strategies
 
     def create_game(self, size, players, winning_strategies):

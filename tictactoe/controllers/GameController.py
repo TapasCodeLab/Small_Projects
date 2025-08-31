@@ -5,8 +5,8 @@ class GameController(object):
     def create_player(self,name,player_type,symbol,difficulty_level=None):
         return self.game_service.create_player(name,player_type,symbol,difficulty_level)
 
-    def create_ws(self, size, players):
-        return self.game_service.create_ws(size, players)
+    def create_ws(self, size, players, strategies):
+        return self.game_service.create_ws(size, players, strategies)
 
     def create_game(self,size, players, winning_strategies):
         return self.game_service.create_game(size, players, winning_strategies)

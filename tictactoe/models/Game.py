@@ -1,9 +1,12 @@
 import random
 
 from tictactoe.exceptions import InvalidNoOfWS
+from tictactoe.exceptions.InvalidDimension import InvalidDimension
+from tictactoe.exceptions.InvalidNoOfBots import InvalidNoOfBots
 from tictactoe.exceptions.InvalidNumberOfPlayers import InvalidNumberOfPlayers
 from tictactoe.models.Board import Board
 from tictactoe.models.GameStatus import GameStatus
+from tictactoe.models.PlayerType import PlayerType
 
 
 class GameBuilder(object):
@@ -25,8 +28,12 @@ class GameBuilder(object):
         return self
 
     def validate(self):
-        if len(self.players) > self.dimension - 1 or len(self.players) < 2:
-            raise InvalidNumberOfPlayers
+        if self.dimension<3:
+            raise InvalidDimension
+        elif len(self.players) > self.dimension - 1 or len(self.players) < 2:
+            raise InvalidNumberOfPlayers(2,self.dimension - 1)
+        elif sum([1 if player.player_type==PlayerType.BOT else 0 for player in self.players])>1:
+            raise InvalidNoOfBots
         elif len(self.winning_strategies) == 0:
             raise InvalidNoOfWS
         else:
